@@ -10,11 +10,11 @@ const DashboardPage: React.FC = () => {
   const getWelcomeMessage = () => {
     switch (profile?.role) {
       case 'admin':
-        return 'Yönetici Dashboard\'ına Hoş Geldiniz';
+        return 'Yönetici Paneline Hoş Geldiniz';
       case 'supplier':
-        return 'Tedarikçi Dashboard\'ına Hoş Geldiniz';
+        return 'Tedarikçi Paneline Hoş Geldiniz';
       case 'customer':
-        return 'Müşteri Dashboard\'ına Hoş Geldiniz';
+        return 'Müşteri Paneline Hoş Geldiniz';
       default:
         return 'Dashboard\'a Hoş Geldiniz';
     }
@@ -44,9 +44,9 @@ const DashboardPage: React.FC = () => {
         ];
       case 'supplier':
         return [
-          { title: 'Toplam Ürünüm', value: '24', icon: Package, color: 'bg-primary' },
+          { title: 'Toplam Ürünüm', value: '240', icon: Package, color: 'bg-primary' },
           { title: 'Bekleyen Siparişler', value: '8', icon: ShoppingCart, color: 'bg-warning' },
-          { title: 'Bu Ay Satış', value: '₺12,450', icon: TrendingUp, color: 'bg-accent' },
+          { title: 'Bu Ay Satış', value: '₺129,450', icon: TrendingUp, color: 'bg-accent' },
           { title: 'Müşteri Puanı', value: '4.8', icon: Star, color: 'bg-muted' },
         ];
       case 'customer':

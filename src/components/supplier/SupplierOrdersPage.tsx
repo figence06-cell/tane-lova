@@ -120,7 +120,7 @@ export const SupplierOrdersPage = () => {
     const statusMap = {
       'pending': { label: 'Beklemede', variant: 'secondary' as const },
       'confirmed': { label: 'Onaylandı', variant: 'default' as const },
-      'shipped': { label: 'Kargoya Verildi', variant: 'outline' as const },
+      'shipped': { label: 'Dağıtıma Çıktı', variant: 'outline' as const },
       'delivered': { label: 'Teslim Edildi', variant: 'default' as const },
       'cancelled': { label: 'İptal Edildi', variant: 'destructive' as const },
     };

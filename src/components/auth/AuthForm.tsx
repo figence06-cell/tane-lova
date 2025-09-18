@@ -157,7 +157,6 @@ export const AuthForm: React.FC = () => {
                       <SelectContent>
                         <SelectItem value="customer">Müşteri</SelectItem>
                         <SelectItem value="supplier">Tedarikçi</SelectItem>
-                        <SelectItem value="admin">Admin</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>

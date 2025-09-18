@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Heart, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { useCart } from "@/contexts/CartContext";
 
 interface Category {
   id: string;
@@ -30,6 +31,7 @@ export const CustomerProductsPage = () => {
   const [loading, setLoading] = useState(true);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const { toast } = useToast();
+  const { addToCart } = useCart();
 
   useEffect(() => {
     fetchCategories();
@@ -139,7 +141,7 @@ export const CustomerProductsPage = () => {
       {/* Header */}
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-bold text-foreground">Ürünlerimiz</h1>
-        <p className="text-muted-foreground">Taze ve kaliteli ürünlerimizi keşfedin</p>
+        <p className="text-muted-foreground">Tüm ürünlerimizi keşfedin</p>
       </div>
 
       {/* Categories */}
@@ -272,6 +274,13 @@ export const CustomerProductsPage = () => {
                         size="sm"
                         className="w-full h-8 text-xs gap-1"
                         onClick={() => {
+                          addToCart({
+                            id: product.id,
+                            name: product.name,
+                            selling_price: product.selling_price,
+                            images: product.images,
+                            stock_quantity: product.stock_quantity,
+                          });
                           toast({
                             title: "Sepete Eklendi",
                             description: `${product.name} sepetinize eklendi.`,
