@@ -39,53 +39,52 @@ export const SupplierOrdersPage = () => {
   const { toast } = useToast();
 
   const fetchOrders = async () => {
-    if (!supplierData) return;
+  if (!supplierData) return;
+  setLoading(true);
 
-    try {
-      const { data, error } = await supabase
-        .from('orders')
-        .select(`
+  try {
+    const { data, error } = await supabase
+      .from('orders')
+      .select(`
+        id,
+        status,
+        total_amount,
+        created_at,
+        customers (
+          customer_name,
+          phone
+        ),
+        order_items!inner (
           id,
-          status,
-          total_amount,
-          created_at,
-          customers (
-            customer_name,
-            phone
-          ),
-          order_items (
+          quantity,
+          unit_price,
+          total_price,
+          products!inner (
             id,
-            quantity,
-            unit_price,
-            total_price,
-            products (
-              id,
-              name
-            )
+            name,
+            supplier_id
           )
-        `)
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-
-      // Filter orders to only include those with supplier's products
-      const filteredOrders = data?.filter(order => 
-        order.order_items.some(item => 
-          item.products && item.products.id // Ensure product exists
         )
-      ) || [];
+      `)
+      // 🔑 Sadece bu tedarikçinin ürünlerinin olduğu siparişler
+      .eq('order_items.products.supplier_id', supplierData.id)
+      .order('created_at', { ascending: false });
 
-      setOrders(filteredOrders);
-    } catch (error: any) {
-      toast({
-        title: 'Hata',
-        description: 'Siparişler yüklenirken bir hata oluştu',
-        variant: 'destructive',
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+    if (error) throw error;
+
+    // Artık backend zaten supplier'a göre filtreledi.
+    setOrders(data || []);
+  } catch (error: any) {
+    toast({
+      title: 'Hata',
+      description: 'Siparişler yüklenirken bir hata oluştu',
+      variant: 'destructive',
+    });
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   useEffect(() => {
     const fetchSupplierData = async () => {
