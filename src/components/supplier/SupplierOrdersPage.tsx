@@ -177,7 +177,7 @@ export const SupplierOrdersPage = () => {
   const STATUS_OPTIONS = [
     { value: 'pending',   label: 'Beklemede' },
     { value: 'confirmed', label: 'Onaylandı' },
-    { value: 'shipped',   label: 'Dağıtıma Çıktı' },
+    { value: 'distribution',   label: 'Dağıtıma Çıktı' },
     { value: 'delivered', label: 'Teslim Edildi' },
     { value: 'cancelled', label: 'İptal Edildi' },
   ];
