@@ -3,7 +3,7 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Building2, LogOut, User } from 'lucide-react';
+import { Building2, LogOut, User, Menu } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 
 export const DashboardHeader: React.FC = () => {
@@ -40,7 +40,7 @@ export const DashboardHeader: React.FC = () => {
         <div className="flex items-center gap-4">
           <SidebarTrigger className="text-muted-foreground hover:text-foreground transition-colors" />
           <div className="flex items-center gap-2">
-            <HamburgerMenu className="h-6 w-6 text-primary" />
+            <Menu className="h-6 w-6 text-primary" />
             <span className="font-semibold text-foreground">TanePro B2B</span>
           </div>
         </div>
