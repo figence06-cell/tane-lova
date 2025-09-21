@@ -13,12 +13,10 @@ import { CategoriesManagementPage } from "@/components/admin/CategoriesManagemen
 import { CustomerProductsPage } from "@/components/customer/CustomerProductsPage";
 import { CustomerOrdersPage } from "@/components/customer/CustomerOrdersPage";
 import { CartPage } from "@/components/customer/CartPage";
-import { ProfilePage }  from "@/components/customer/ProfilePage";
 import Index from "./pages/Index";
 import AuthPage from "./pages/AuthPage";
 import DashboardPage from "./pages/DashboardPage";
 import NotFound from "./pages/NotFound";
-import ProfilePage from "./pages/ProfilePage";
 
 
 
@@ -103,11 +101,7 @@ const App = () => (
                 <CartPage />
               </DashboardLayout>
             } />
-            <Route path="/customer/profile" element={
-              <DashboardLayout>
-                <ProfilePage />
-              </DashboardLayout>
-            } />
+           
             
             {/* Catch-all routes */}
             <Route path="*" element={<NotFound />} />
