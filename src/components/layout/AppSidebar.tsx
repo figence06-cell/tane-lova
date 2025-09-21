@@ -65,7 +65,7 @@ export const AppSidebar: React.FC = () => {
           { title: 'Ürünler', url: '/customer/products', icon: Grid3X3 },
           { title: 'Sepetim', url: '/customer/cart', icon: ShoppingBag },
           { title: 'Siparişlerim', url: '/customer/orders', icon: ShoppingCart },
-          { title: 'Bilgilerim', url: '/customer/ProfilePage', icon: Users },
+          { title: 'Bilgilerim', url: './pages/ProfilePage', icon: Users },
 
           
          
