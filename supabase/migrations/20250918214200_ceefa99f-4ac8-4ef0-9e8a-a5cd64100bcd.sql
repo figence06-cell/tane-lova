@@ -1,9 +1,23 @@
--- Add INSERT policy for customers to create their own orders
-CREATE POLICY "Customers can create own orders" 
-ON orders 
-FOR INSERT 
-WITH CHECK (customer_id IN (
-  SELECT customers.id 
-  FROM customers 
-  WHERE customers.user_id = auth.uid()
-));
+-- INSERT: kullanıcı kendi customer kaydıyla sipariş yaratabilsin
+CREATE POLICY "orders.insert.customer_self"
+ON public.orders
+FOR INSERT TO authenticated
+WITH CHECK (
+  customer_id IN (
+    SELECT c.id
+    FROM public.customers c
+    WHERE c.user_id = auth.uid()
+  )
+);
+
+-- SELECT: kullanıcı sadece kendi siparişlerini görebilsin
+CREATE POLICY "orders.select.customer_self"
+ON public.orders
+FOR SELECT TO authenticated
+USING (
+  customer_id IN (
+    SELECT c.id
+    FROM public.customers c
+    WHERE c.user_id = auth.uid()
+  )
+);

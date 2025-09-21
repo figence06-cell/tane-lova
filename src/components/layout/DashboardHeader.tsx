@@ -77,14 +77,12 @@ export const DashboardHeader: React.FC = () => {
                 </p>
               </div>
               <DropdownMenuSeparator />
-             
-
               <DropdownMenuItem asChild>
-  <NavLink to={`/${profile?.role}/profile`}>
-    <User className="mr-2 h-4 w-4" />
-    <span>Profil</span>
-  </NavLink>
-</DropdownMenuItem>
+              <NavLink to={`/${profile?.role}/profile`}>
+              <User className="mr-2 h-4 w-4" />
+              <span>Profil</span>
+              </NavLink>
+              </DropdownMenuItem>
 
 
               <DropdownMenuSeparator />

@@ -223,13 +223,7 @@ CREATE TRIGGER update_orders_updated_at
   BEFORE UPDATE ON public.orders
   FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
 
--- Insert sample categories
-INSERT INTO public.categories (name, description) VALUES
-  ('Elektronik', 'Elektronik ürünler ve aksesuarlar'),
-  ('Mobilya', 'Ofis ve ev mobilyaları'),
-  ('Tekstil', 'Kumaş ve tekstil ürünleri'),
-  ('Gıda', 'Gıda ve içecek ürünleri'),
-  ('İnşaat', 'İnşaat malzemeleri');
+
 
 -- Create function to handle new user registration
 CREATE OR REPLACE FUNCTION public.handle_new_user()

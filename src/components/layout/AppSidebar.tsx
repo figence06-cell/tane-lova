@@ -56,7 +56,7 @@ export const AppSidebar: React.FC = () => {
           { title: 'Ürün Ekle', url: '/supplier/add-product', icon: Store },
           { title: 'Siparişlerim', url: '/supplier/orders', icon: ShoppingCart },
           { title: 'Sipariş Geçmişi', url: '/supplier/order-history', icon: History },
-          { title: 'Bilgilerim', url: '/supplier/profile', icon: TrendingUp },
+          
         ];
       
       case 'customer':
@@ -65,7 +65,7 @@ export const AppSidebar: React.FC = () => {
           { title: 'Ürünler', url: '/customer/products', icon: Grid3X3 },
           { title: 'Sepetim', url: '/customer/cart', icon: ShoppingBag },
           { title: 'Siparişlerim', url: '/customer/orders', icon: ShoppingCart },
-          { title: 'Bilgilerim', url: '/customer/profile', icon: TrendingUp },
+         
         ];
       
       default:

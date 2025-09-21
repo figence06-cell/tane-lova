@@ -207,7 +207,7 @@ export const AddProductForm = () => {
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Kategori seçiniz" />
+                          <SelectValue placeholder="Kategori Seçiniz" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>

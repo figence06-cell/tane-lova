@@ -17,6 +17,8 @@ import Index from "./pages/Index";
 import AuthPage from "./pages/AuthPage";
 import DashboardPage from "./pages/DashboardPage";
 import NotFound from "./pages/NotFound";
+import ProfilePage from "./pages/ProfilePage";
+
 
 const queryClient = new QueryClient();
 
@@ -81,10 +83,10 @@ const App = () => (
               </DashboardLayout>
             } />
             <Route path="/supplier/profile" element={
-              <DashboardLayout>
-                <ProfilePage />
-              </DashboardLayout>
-            } />
+              <ProfilePage />} />
+
+            <Route path="/customer/profile" element={
+              <ProfilePage />} />
             
          
 
