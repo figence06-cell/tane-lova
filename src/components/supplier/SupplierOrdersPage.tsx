@@ -6,6 +6,8 @@ import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Package, Search, ShoppingCart, User, Calendar, DollarSign } from 'lucide-react';
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
+
 
 interface OrderItem {
   id: string;
@@ -278,22 +280,27 @@ export const SupplierOrdersPage = () => {
                           {getStatusBadge(order.status).label}
                         </Badge>
 
-                        {/* Durum değiştirici (tedarikçi güncelleyebilir) */}
                         <div className="flex items-center gap-2">
-                          <span className="text-sm text-muted-foreground">Durum:</span>
-                          <select
-                            className="border rounded-md px-2 py-1 bg-background"
-                            value={order.status}
-                            onChange={(e) => updateOrderStatus(order.id, e.target.value)}
-                          >
-                            {STATUS_OPTIONS.map((opt) => (
-                              <option key={opt.value} value={opt.value}>
-                                {opt.label}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-                      </div>
+    <span className="text-sm text-muted-foreground">Durum:</span>
+    <Select
+      value={order.status}
+      onValueChange={(val) => updateOrderStatus(order.id, val)}
+    >
+      <SelectTrigger className="w-40 h-8">
+        <SelectValue placeholder="Durum seçin" />
+      </SelectTrigger>
+      <SelectContent>
+        {STATUS_OPTIONS.map((opt) => (
+          <SelectItem key={opt.value} value={opt.value}>
+            {opt.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  </div>
+</div>
+
+                       
 
                       {order.customers && (
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
