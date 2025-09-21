@@ -64,6 +64,7 @@ const App = () => (
             } />
             
             {/* Supplier Routes */}
+
             <Route path="/supplier/products" element={
               <DashboardLayout>
                 <ProductsPage />
@@ -79,7 +80,14 @@ const App = () => (
                 <SupplierOrdersPage />
               </DashboardLayout>
             } />
+            <Route path="/supplier/profile" element={
+              <DashboardLayout>
+                <ProfilePage />
+              </DashboardLayout>
+            } />
             
+         
+
             {/* Customer Routes */}
             <Route path="/customer/products" element={
               <DashboardLayout>
@@ -94,6 +102,11 @@ const App = () => (
             <Route path="/customer/cart" element={
               <DashboardLayout>
                 <CartPage />
+              </DashboardLayout>
+            } />
+            <Route path="/customer/profile" element={
+              <DashboardLayout>
+                <ProfilePage />
               </DashboardLayout>
             } />
             
