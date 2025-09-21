@@ -40,7 +40,7 @@ export const DashboardHeader: React.FC = () => {
         <div className="flex items-center gap-4">
           <SidebarTrigger className="text-muted-foreground hover:text-foreground transition-colors" />
           <div className="flex items-center gap-2">
-            <Building2 className="h-6 w-6 text-primary" />
+            <HamburgerMenu className="h-6 w-6 text-primary" />
             <span className="font-semibold text-foreground">TanePro B2B</span>
           </div>
         </div>
