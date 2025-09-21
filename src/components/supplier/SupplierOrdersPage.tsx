@@ -38,11 +38,15 @@ export const SupplierOrdersPage = () => {
   const { user } = useAuth();
   const { toast } = useToast();
 
-  const fetchOrders = async () => {
+
+//başladı
+
+ const fetchOrders = async () => {
   if (!supplierData) return;
   setLoading(true);
 
   try {
+    // Sadece bu tedarikçinin ürünlerinin yer aldığı siparişleri çek
     const { data, error } = await supabase
       .from('orders')
       .select(`
@@ -66,18 +70,18 @@ export const SupplierOrdersPage = () => {
           )
         )
       `)
-      // 🔑 Sadece bu tedarikçinin ürünlerinin olduğu siparişler
-      .eq('order_items.products.supplier_id', supplierData.id)
+      .eq('order_items.products.supplier_id', supplierData.id) // 🔑 supplier filtresi
       .order('created_at', { ascending: false });
 
     if (error) throw error;
 
-    // Artık backend zaten supplier'a göre filtreledi.
-    setOrders(data || []);
+    // Gelen veri zaten yalnızca bu tedarikçinin item’larını içeriyor.
+    // Tip uyumu için (Order arayüzünde order_items bekleniyor) doğrudan set edebiliriz.
+    setOrders((data as any) || []);
   } catch (error: any) {
     toast({
       title: 'Hata',
-      description: 'Siparişler yüklenirken bir hata oluştu',
+      description: 'Siparişler yüklenirken bir hata oluştu: ' + error.message,
       variant: 'destructive',
     });
   } finally {
@@ -85,6 +89,7 @@ export const SupplierOrdersPage = () => {
   }
 };
 
+//bitti
 
   useEffect(() => {
     const fetchSupplierData = async () => {
