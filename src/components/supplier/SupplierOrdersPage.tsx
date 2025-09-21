@@ -46,48 +46,73 @@ export const SupplierOrdersPage = () => {
   setLoading(true);
 
   try {
-    // Sadece bu tedarikçinin ürünlerinin yer aldığı siparişleri çek
-    const { data, error } = await supabase
-      .from('orders')
+    // 1) Bu tedarikçinin ürünlerine ait order_items'ları çek
+    const { data: items, error } = await supabase
+      .from('order_items')
       .select(`
         id,
-        status,
-        total_amount,
-        created_at,
-        customers (
-          customer_name,
-          phone
-        ),
-        order_items!inner (
+        order_id,
+        quantity,
+        unit_price,
+        total_price,
+        products!inner (
           id,
-          quantity,
-          unit_price,
-          total_price,
-          products!inner (
-            id,
-            name,
-            supplier_id
+          name,
+          supplier_id
+        ),
+        orders!inner (
+          id,
+          status,
+          total_amount,
+          created_at,
+          customers (
+            customer_name,
+            phone
           )
         )
       `)
-      .eq('order_items.products.supplier_id', supplierData.id) // 🔑 supplier filtresi
-      .order('created_at', { ascending: false });
+      .eq('products.supplier_id', supplierData.id)   // 🔑 doğrudan supplier filtresi
+      .order('orders(created_at)', { ascending: false }); // sipariş tarihine göre sırala
 
     if (error) throw error;
 
-    // Gelen veri zaten yalnızca bu tedarikçinin item’larını içeriyor.
-    // Tip uyumu için (Order arayüzünde order_items bekleniyor) doğrudan set edebiliriz.
-    setOrders((data as any) || []);
-  } catch (error: any) {
+    // 2) items -> orders yapısına dönüştür (tek siparişte birden çok item olabilir)
+    const map = new Map<string, any>();
+    for (const it of items || []) {
+      const o = it.orders;
+      if (!o) continue; // güvenlik
+      if (!map.has(o.id)) {
+        map.set(o.id, {
+          id: o.id,
+          status: o.status,
+          total_amount: o.total_amount,
+          created_at: o.created_at,
+          customers: o.customers ?? null,
+          order_items: [],
+        });
+      }
+      // sadece bu tedarikçinin ürünleri eklensin
+      map.get(o.id).order_items.push({
+        id: it.id,
+        quantity: it.quantity,
+        unit_price: it.unit_price,
+        total_price: it.total_price,
+        products: it.products ? { id: it.products.id, name: it.products.name } : null,
+      });
+    }
+
+    setOrders(Array.from(map.values()));
+  } catch (err: any) {
     toast({
       title: 'Hata',
-      description: 'Siparişler yüklenirken bir hata oluştu: ' + error.message,
+      description: 'Siparişler yüklenirken bir hata oluştu: ' + err.message,
       variant: 'destructive',
     });
   } finally {
     setLoading(false);
   }
 };
+
 
 //bitti
 
