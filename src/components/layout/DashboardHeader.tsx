@@ -34,8 +34,6 @@ export const DashboardHeader: React.FC = () => {
     return profile?.email?.[0]?.toUpperCase() || 'U';
   };
 
-
-
   return (
     <header className="h-16 border-b border-border bg-card/50 backdrop-blur-sm">
       <div className="flex items-center justify-between h-full px-6">
@@ -77,14 +75,10 @@ export const DashboardHeader: React.FC = () => {
                 </p>
               </div>
               <DropdownMenuSeparator />
-              <DropdownMenuItem asChild>
-              <NavLink to={`/${profile?.role}/profile`}>
-              <User className="mr-2 h-4 w-4" />
-              <span>Profil</span>
-              </NavLink>
+              <DropdownMenuItem className="cursor-pointer">
+                <User className="mr-2 h-4 w-4" />
+                <span>Profil</span>
               </DropdownMenuItem>
-
-
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 className="cursor-pointer text-destructive focus:text-destructive"
